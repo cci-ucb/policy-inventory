@@ -2,7 +2,7 @@
        "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>UCB Urban Displacement Project Maps</title>
+<title>Urban Displacement Project: Policy Inventory</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
@@ -42,7 +42,20 @@ html, body, #map {
 	padding: 0;
 }
 
+/* policy info panel */
+#policy-info {
+	position: absolute;
+	top: 140px;
+	left: 600px;
+	width: 250px;
+	background-color: white;
+}
+
 /* overrides default style for legends */
+#map .cartodb-legend-stack {
+	left: 30px;
+	width: 280px;
+}
 #map .cartodb-legend-stack .cartodb-legend .legend-title {
 	font-family: 'Open Sans', sans-serif;
 	color: black;
@@ -200,11 +213,20 @@ and (max-width: 380px) {
 <body>
 	
 <div id="topBanner">
-	<a href='http://communityinnovation.berkeley.edu/'><img src='cci-logo.png' height='60'></a> UCB Urban Displacement Project Maps</div>
+	<a href='http://communityinnovation.berkeley.edu/'><img src='cci-logo.png' height='60'></a>Urban Displacement Project: Policy Inventory</div>
 	
 <div id="mapContainer"></div>
 
-<div id ="layerSelectionContainer">
+<div id="policy-info" class="panel panel-danger">
+	<div class="panel-heading">Test panel</div>
+	<div class="panel-body"></div>
+	<ul class="list-group">
+		<li class="list-group-item">item</li>
+		<li class="list-group-item">item</li>
+	</ul>
+</div>
+
+<div id="layerSelectionContainer">
 <div class="dropdown">
 <!-- this button style is from the Bootstrap library -->
   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -213,131 +235,17 @@ and (max-width: 380px) {
   </button>
   <ul class="dropdown-menu scrollable-menu" id="layer-selector" aria-labelledby="dropdownMenuDivider">
 	  
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/e78166c2-3222-11e5-a648-0e0c41326911/viz.json" class="active">
-    <a href="#">Displacement typologies</a></li>
+    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/0f3442ba-c004-11e5-972d-0e3ff518bd15/viz.json" class="active">
+    <a href="#">Number of anti-displacement policies</a></li>
     
     <li role="separator" class="divider"></li>
 
     <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/787c6988-47bd-11e5-8eca-0e853d047bba/viz.json">
     <a href="#">Basemap only</a></li>
     
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/3949b4a2-31a4-11e5-aeae-0e9d821ea90d/viz.json">
-    <a href="#">Population (2013)</a></li>
-    
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/2b46eec6-31c5-11e5-b5ff-0e0c41326911/viz.json">
-    <a href="#">Housing units in pre-1950 buildings (%, 2013)</a></li>
-
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/5fa529e4-31c5-11e5-ba97-0e4fddd5de28/viz.json">
-    <a href="#">Change in LI households w/ low rent burden (#, 2000-2013)</a></li>
-
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/1f194bfc-31c6-11e5-904c-0e4fddd5de28/viz.json">
-    <a href="#">Employment density: jobs per square mile (2011)</a></li>
-
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/6cd76982-31c6-11e5-9b93-0e853d047bba/viz.json">
-    <a href="#">Change in median home sale price (%, 2000-2013)</a></li>
-
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/d966d7ea-31c6-11e5-a76b-0e0c41326911/viz.json">
-    <a href="#">Change in rent (%, 2000-2013)</a></li>
-
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/1d9cf94e-31c7-11e5-9940-0e0c41326911/viz.json">
-    <a href="#">New market-rate units (#, 2000-2013)</a></li>
-
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/7b22760c-31c7-11e5-8946-0e4fddd5de28/viz.json">
-    <a href="#">Change in low-income households (#, 2000-2013)</a></li>
-    
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/b35ae3ba-31c7-11e5-86fe-0e9d821ea90d/viz.json">
-    <a href="#">Change in % low-income in-migration (2009-2013)</a></li>
-    
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/dff21f10-31c7-11e5-93e1-0e4fddd5de28/viz.json">
-    <a href="#">Population growth (%, 2000-2013)</a></li>
-    
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/23b35814-3596-11e5-8339-0e9d821ea90d/viz.json">
-    <a href="#">Low-income households (%, 1990)</a></li>
-    
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/b84a87a4-3596-11e5-8787-0e853d047bba/viz.json">
-    <a href="#">Low-income households (%, 2000)</a></li>
-    
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/dbc86c1e-3596-11e5-a30c-0e4fddd5de28/viz.json">
-    <a href="#">Low-income households (%, 2013)</a></li>
-    
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/f582fb24-3596-11e5-b01c-0e853d047bba/viz.json">
-    <a href="#">Adults (25+) with college degree (%, 1990)</a></li>
-    
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/1c78891a-3597-11e5-8f88-0e9d821ea90d/viz.json">
-    <a href="#">Adults (25+) with college degree (%, 2000)</a></li>
-    
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/49de57cc-3597-11e5-8339-0e9d821ea90d/viz.json">
-    <a href="#">Adults (25+) with college degree (%, 2013)</a></li>
-    
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/71dc8adc-3597-11e5-add1-0e4fddd5de28/viz.json">
-    <a href="#">Renter households (%, 1990)</a></li>
-    
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/aa69d72e-3597-11e5-a122-0e853d047bba/viz.json">
-    <a href="#">Renter households (%, 2000)</a></li>
-    
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/c4cc9962-3597-11e5-8f88-0e9d821ea90d/viz.json">
-    <a href="#">Renter households (%, 2013)</a></li>
-    
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/ee8cbdfe-3597-11e5-9ae6-0e018d66dc29/viz.json">
-    <a href="#">Non-white population (%, 1990)</a></li>
-    
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/07284b80-3598-11e5-8dd3-0e018d66dc29/viz.json">
-    <a href="#">Non-white population (%, 2000)</a></li>
-    
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/2d3006d8-3598-11e5-87fb-0e0c41326911/viz.json">
-    <a href="#">Non-white population (%, 2013)</a></li>
-    
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/4a2c93a0-3598-11e5-add1-0e4fddd5de28/viz.json">
-    <a href="#">Change in college-educated adult population (%, 1990-2000)</a></li>
-    
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/7342885c-3599-11e5-9ae6-0e018d66dc29/viz.json">
-    <a href="#">Change in college-educated adult population (%, 2000-2013)</a></li>
-    
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/9c73c1aa-3599-11e5-acd8-0e4fddd5de28/viz.json">
-    <a href="#">Median household income (1990)</a></li>
-    
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/becd2fca-3599-11e5-9dbf-0e0c41326911/viz.json">
-    <a href="#">Median household income (2000)</a></li>
-    
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/ea62cdc0-3599-11e5-9c5d-0e018d66dc29/viz.json">
-    <a href="#">Median household income (2013)</a></li>
-    
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/10f600a6-359a-11e5-adcc-0e9d821ea90d/viz.json">
-    <a href="#">Change in median household income (%, 1990-2000)</a></li>
-    
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/3250f9fe-359a-11e5-a343-0e853d047bba/viz.json">
-    <a href="#">Change in median household income (%, 2000-2013)</a></li>
-    
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/5267e5b8-359a-11e5-87fb-0e0c41326911/viz.json">
-    <a href="#">Market-rate units as % of new building (1990-2000)</a></li>
-    
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/8b414852-359a-11e5-9435-0e4fddd5de28/viz.json">
-    <a href="#">Market-rate units as % of new building (2000-2013)</a></li>
-    
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/a3819c32-359a-11e5-ab62-0e9d821ea90d/viz.json">
-    <a href="#">Change in median home sale price (%, 1990-2000)</a></li>
-    
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/f3360c86-359a-11e5-a343-0e853d047bba/viz.json">
-    <a href="#">Change in median home sale price (%, 2000-2013)</a></li>
-    
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/1dedc96e-359b-11e5-ae41-0e853d047bba/viz.json">
-    <a href="#">Change in median home value (%, 1990-2000)</a></li>
-    
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/4b905f62-359b-11e5-ae41-0e853d047bba/viz.json">
-    <a href="#">Change in median home value (%, 2000-2013)</a></li>
-    
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/7492b086-359b-11e5-84af-0e0c41326911/viz.json">
-    <a href="#">Gentrified between 1990 and 2000</a></li>
-    
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/fad41612-359b-11e5-8f88-0e9d821ea90d/viz.json">
-    <a href="#">Gentrified between 2000 and 2013</a></li>
-    
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/330fa92e-359c-11e5-9c5d-0e018d66dc29/viz.json">
-    <a href="#">Low-income in-migration (%, 2009)</a></li>
-    
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/5eaa5c82-359c-11e5-8bf3-0e4fddd5de28/viz.json">
-    <a href="#">Low-income in-migration (%, 2013)</a></li>
-    
+    <li data-url="">
+    <a href="#">Menu TK</a></li>
+        
   </ul>
 </div>
 </div>
@@ -474,48 +382,18 @@ and (max-width: 380px) {
 </div>
 </div>
 
+
+<!--
 <div class="expand-map">
 	<a onclick="expandMap();" class="btn btn-primary">
 		Larger <span class="glyphicon glyphicon-chevron-down"></span> Map</a></div>
+-->
 
 <div id="textContent">
 	
-<div><h3>Mapping Displacement and Gentrification in the San Francisco Bay Area</h3></div>
+<div><h3>Policy Inventory and Survey</h3></div>
 
-<div><a href="http://communityinnovation.berkeley.edu/uploads/Table.png" target="_blank"><img class="figure mobile-hide" src="http://communityinnovation.berkeley.edu/uploads/Table.png"></a>
-
-The Bay Area’s booming jobs and housing market necessitates a careful look at the causes and consequences of neighborhood change to protect residents that are most vulnerable to potentially being displaced. Wages for the Bay Area’s low income residents have not kept pace with the sky-rocketing housing prices resulting in massive demographic shifts in the area.
-
-<br><br>
-UC Berkeley analyzed regional data on housing, income and other demographics to better understand and predict where gentrification and displacement is happening and will likely occur in the future. This analysis, which is summarized in the interactive maps, will allow communities to better characterize their experience and risk of displacement and to stimulate action. The analysis behind these maps was validated through in-depth case studies of 9 Bay Area communities and with the support and advice of the <a href="http://planbayarea.org/regional-initiatives/Bay-Area-Prosperity-Plan.html">Regional Prosperity Plan</a> at the <a href="http://www.mtc.ca.gov/">Metropolitan Transportation Commission</a>. In developing 8 neighborhood displacement typologies, communities can better understand where they’re at and develop actions to prevent from advancing in the stages of gentrification and displacement.
-</div>
-
-<div class="larger">
-<br><h3>Key Findings</h3>
-<ul>
-<li>In 2013, 48 percent of census tracts and more than 53 percent of low-income households lived in neighborhoods at risk of or already experiencing displacement and gentrification pressures.<br></li>
-<li>Neighborhoods with rail stations, historic housing stock, an abundance of market rate developments and rising housing prices are especially at risk of losing low-income households.<br></li>
-<li>Low income neighborhoods are not the only ones experiencing displacement pressures &ndash; many higher income neighborhoods that still house low income households are also rapidly losing low income population.<br></li>
-<li>The number of tracts at risk of displacement are 125% higher than the numbers already experiencing them, indicating that the transformation of the Bay Area will continue to accelerate.<br></li>
-</ul></div>
-
-<div><br><h3>Data and Documentation</h3>
-<ul><li><a href="http://iurd.berkeley.edu/uploads/CCI_Final_Report_07_23_15.pdf">Methodology & results of the Regional Early Warning System</a> [PDF]</li>
-<li><a href="http://communityinnovation.berkeley.edu/uploads/CCI_REWS_data_2015-08-21.xlsx">Download all data series from map</a> [XLS]</li></ul>
-</div>
-
-<div><br><h3>Additional Resources from UCB Urban Displacement Project</h3>
-<ul>
-<li><a href="http://iurd.berkeley.edu/new-methodology-for-analyzing-displacement">Developing a New Methodology for Analyzing Potential Displacement</a></li>
-<li><a href="http://iurd.berkeley.edu/uploads/Displacement_Lit_Review_Final.pdf">Literature review on gentrification, displacement and the relationship to public and private investment</a> [PDF]</li>
-<li><a href="http://communityinnovation.berkeley.edu/case-studies-on-gentrification-and-displacement-pressures-in-the-bay-area">Case studies on gentrification and displacement pressures in 9 neighborhoods in the Bay Area</a></li>
-</ul>
-</div>
-
-<div class="smaller">
-<br><h4>Notes</h4>
-<ul><li>Data sources include the U.S. Census, American Community Survey (ACS), California Housing Partnership Corporation (CHPC), National Establishment Time-Series (NETS), and DataQuick. Please see our downloadable data table above for more details. 
-</li></ul></div>
+Text TK
 
 <div><br><br></div>
 
@@ -524,9 +402,9 @@ UC Berkeley analyzed regional data on housing, income and other demographics to 
 // set the initial map options and url here
 var INITIAL_MAP_SETTINGS = {
 	detectRetina: true,
-	center_lat: 37.8,
-	center_lon: -122.3,
-	zoom: 11
+	center_lat: 37.7,
+	center_lon: -122.2,
+	zoom: 9
 }
 var INITIAL_VISJSON_URL = $('#layer-selector .active').data('url');
 
@@ -553,14 +431,12 @@ function setUpMap(visjsonURL, mapSettings) {
 			// replicate prior geo selection
 			if (activeQuery) getVisLayer().setSQL(activeQuery);
 			if (activeCityName) addCityOutline(activeCityName);
-			// set custom text for search box, and remove when user clicks
-			var textBox = $("#map .cartodb-searchbox .text");
-			var defaultTxt = 'Go to place';
-			textBox.val(defaultTxt);
-			textBox.click(function() { 
-				if ($(this).val() == defaultTxt) $(this).val(''); 
+			
+			// new code for interactivity
+			getVisLayer().on('featureClick', function(e, latlng, pos, data) {
+				alert("hey\n" + data.cartodb_id);
 			});
-		});
+	});
 }
 
 $('#layer-selector li').click(function() {
