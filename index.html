@@ -45,10 +45,20 @@ html, body, #map {
 /* policy info panel */
 #policy-info {
 	position: absolute;
-	top: 140px;
+	top: 100px;
 	left: 600px;
-	width: 250px;
+	width: 500px;
 	background-color: white;
+	box-shadow: rgba(0,0,0,.1) 0 0 4px 2px;
+	font-size: 12px;
+}
+#policy-info .panel-heading {
+	font-size: 16px;
+	font-weight: bold;
+}
+#policy-info .list-group-item {
+	padding-top: 4px;
+	padding-bottom: 4px;
 }
 
 /* overrides default style for legends */
@@ -218,11 +228,27 @@ and (max-width: 380px) {
 <div id="mapContainer"></div>
 
 <div id="policy-info" class="panel panel-danger">
-	<div class="panel-heading">Test panel</div>
-	<div class="panel-body"></div>
+	<div class="panel-heading">Alameda</div>
 	<ul class="list-group">
-		<li class="list-group-item">item</li>
-		<li class="list-group-item">item</li>
+		<li class="list-group-item"><b>County:</b> Alameda</li>
+		<li class="list-group-item"><b>Just Cause Eviction Ordinance:</b> No</li>
+		<li class="list-group-item"><b>Rent stabilization or rent control:</b> No</li>
+		<li class="list-group-item"><b>Rent Review Board:</b> Yes, Rent Review Advisory Committee. Mediation only (Early 1990s)</li>
+		<li class="list-group-item"><b>Mobile Home Rent Control:</b> No</li>
+		<li class="list-group-item"><b>SRO Preservation:</b> No</li>
+		<li class="list-group-item"><b>Condominium Conversion regulations:</b> Limits conversions if the percentage of rental units drops below 40% of the total available housing stoc. Must meet requirements of Design Review and the Planning Board. Tenant relocation assistance plan is required, which must give particular attention to the needs of elderly, handicapped, households with minor children, and households of low and moderate income. Ratio of owner-occupied units must not exceed 60% of the total number of dwelling units available. Year: 1983</li>
+		<li class="list-group-item"><b>Foreclosure Assistance:</b> Yes (2013)</li>
+		<li class="list-group-item"><b>Jobs-Housing Linkage Fee or Affordable Housing Impact/Linkage Fee:</b> Yes (1989)</li>
+		<li class="list-group-item"><b>Commercial Linkage Fee/Program:</b> Office $3.00/sf, Retail $1.50/sf, Hotel/motel $770/room (1989, revised 2001) </li>
+		<li class="list-group-item"><b>Housing Trust Fund:</b> Yes</li>
+		<li class="list-group-item"><b>Inclusionary zoning/housing (Below Market Rate Housing):</b> For all Residential Developments of five (5) or more units, at least fifteen percent (15%) of the total units must be Inclusionary Units restricted for occupancy by Very Low-, Low- or Moderate-Income Households. Breakdown: 4% affordable to very low, 4% affordable to low, 7% affordable to moderate-income households. Yes in-lieu fee. (2004) Yes in-lieu fee for 9 or fewer units.</li>
+		<li class="list-group-item"><b>Density Bonus Ordinance:</b> Yes (2009)</li>
+		<li class="list-group-item"><b>Community Land Trusts:</b> No</li>
+		<li class="list-group-item"><b>First Source Hiring Ordinances:</b> No</li>
+		<li class="list-group-item"><b>Sources:</b> 
+			<br>https://www.municode.com/library/ca/alameda/codes/code_of_ordinances?nodeId=CHIIAD_ARTIIBOCO_2-23REREADCO_2-24--2-29RE
+			<br>https://www.municode.com/library/ca/alameda/codes/code_of_ordinances?nodeId=CHXXVIIDEFE_27-3DEIMFE_27-3.12FEFEES
+			<br>https://www.municode.com/library/ca/alameda/codes/code_of_ordinances?nodeId=CHXXXDERE_ARTIZODIRE_30-17DEBOOR</li>
 	</ul>
 </div>
 
@@ -403,7 +429,7 @@ Text TK
 var INITIAL_MAP_SETTINGS = {
 	detectRetina: true,
 	center_lat: 37.7,
-	center_lon: -122.2,
+	center_lon: -122,
 	zoom: 9
 }
 var INITIAL_VISJSON_URL = $('#layer-selector .active').data('url');
@@ -434,7 +460,7 @@ function setUpMap(visjsonURL, mapSettings) {
 			
 			// new code for interactivity
 			getVisLayer().on('featureClick', function(e, latlng, pos, data) {
-				alert("hey\n" + data.cartodb_id);
+				alert("test - id " + data.cartodb_id);
 			});
 	});
 }
