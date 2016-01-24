@@ -38,7 +38,7 @@ html, body, #map {
 	margin-left: 0;
 	margin-right: 0;
 	width: 100%;
-	height: 450px;
+	height: 550px;
 	padding: 0;
 }
 
@@ -130,14 +130,12 @@ html, body, #map {
 	top: 100px;
 	left: 90px;
 	padding: 0px;
-	font-size: 12px;
 }
 #geoSelectionContainer {
 	position: absolute;
 	top: 140px;
 	left: 90px;
 	padding: 0px;
-	font-size: 12px;
 }
 
 #textContent {
@@ -247,7 +245,7 @@ and (max-width: 380px) {
 			&nbsp;&nbsp;<span id="inv5">-</span></li>
 		<li class="list-group-item"><b>SRO Preservation:</b>
 			&nbsp;&nbsp;<span id="inv6">-</span></li>
-		<li class="list-group-item"><b>Condominium Conversion regulations:</b>
+		<li class="list-group-item"><b>Condominium Conversion Regulations:</b>
 			&nbsp;&nbsp;<span id="inv7">-</span></li>
 		<li class="list-group-item"><b>Foreclosure Assistance:</b>
 			&nbsp;&nbsp;<span id="inv8">-</span></li>
@@ -266,9 +264,7 @@ and (max-width: 380px) {
 		<li class="list-group-item"><b>First Source Hiring Ordinances:</b>
 			&nbsp;&nbsp;<span id="inv15">-</span></li>
 		<li class="list-group-item"><b>Sources:</b> 
-			<br>https://www.municode.com/library/ca/alameda/codes/code_of_ordinances?nodeId=CHIIAD_ARTIIBOCO_2-23REREADCO_2-24--2-29RE
-			<br>https://www.municode.com/library/ca/alameda/codes/code_of_ordinances?nodeId=CHXXVIIDEFE_27-3DEIMFE_27-3.12FEFEES
-			<br>https://www.municode.com/library/ca/alameda/codes/code_of_ordinances?nodeId=CHXXXDERE_ARTIZODIRE_30-17DEBOOR</li>
+			<br>-</li>
 	</ul>
 </div>
 
@@ -286,11 +282,47 @@ and (max-width: 380px) {
     
     <li role="separator" class="divider"></li>
 
-    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/787c6988-47bd-11e5-8eca-0e853d047bba/viz.json">
-    <a href="#">Basemap only</a></li>
+    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/67817fd0-c231-11e5-9621-0e5db1731f59/viz.json">
+    <a href="#">Just cause eviction ordinance</a></li>
     
-    <li data-url="">
-    <a href="#">Menu TK</a></li>
+    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/30f316c0-c233-11e5-8b1b-0ea31932ec1d/viz.json">
+    <a href="#">Rent stabilization or rent control</a></li>
+    
+    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/772b3aa0-c233-11e5-90af-0e5db1731f59/viz.json">
+    <a href="#">Rent review board</a></li>
+    
+    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/92e6efdc-c233-11e5-9730-0e31c9be1b51/viz.json">
+    <a href="#">Mobile home rent control</a></li>
+    
+    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/abc35504-c233-11e5-a7df-0e5db1731f59/viz.json">
+    <a href="#">SRO preservation</a></li>
+    
+    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/c54681a4-c233-11e5-ac63-0ecd1babdde5/viz.json">
+    <a href="#">Condominium conversion regulations</a></li>
+    
+    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/de20196a-c233-11e5-9e04-0ecfd53eb7d3/viz.json">
+    <a href="#">Foreclosure assistance</a></li>
+    
+    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/f9ebb316-c233-11e5-b63e-0e787de82d45/viz.json">
+    <a href="#">Housing linkage fee</a></li>
+    
+    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/9b4805b6-c234-11e5-812e-0e787de82d45/viz.json">
+    <a href="#">Commercial linkage fee</a></li>
+    
+    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/b1bfa3da-c234-11e5-9aa6-0e3ff518bd15/viz.json">
+    <a href="#">Housing trust fund</a></li>
+    
+    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/d73d07ce-c234-11e5-af0f-0e3ff518bd15/viz.json">
+    <a href="#">Inclusionary zoning</a></li>
+    
+    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/0faa0850-c235-11e5-9e04-0ecfd53eb7d3/viz.json">
+    <a href="#">Density bonus ordinance</a></li>
+    
+    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/2461b310-c235-11e5-b82d-0e31c9be1b51/viz.json">
+    <a href="#">Community land trusts</a></li>
+    
+    <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/3dbcc8b8-c235-11e5-bc5e-0e3ff518bd15/viz.json">
+    <a href="#">First source hiring</a></li>
         
   </ul>
 </div>
@@ -660,8 +692,8 @@ $('#geo-selector li').click(function() {
 	
 	//activeVis.getNativeMap().panBy([150,0], {animate: false});
 		
-    // apply the query and save it in case the layer is changed
-	activeQuery = query;
+    // save query in case the layer is changed
+	// activeQuery = query;
 	resetMenu($(this));
 });
 
