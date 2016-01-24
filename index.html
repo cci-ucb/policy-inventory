@@ -439,15 +439,6 @@ Text TK
 
 <script>
 
-// set the initial map options and url here
-var INITIAL_MAP_SETTINGS = {
-	detectRetina: true,
-	center_lat: 37.7,
-	center_lon: -122,
-	zoom: 9
-}
-var INITIAL_VISJSON_URL = $('#layer-selector .active').data('url');
-
 var inventoryText = [["0","Alameda","78","600562","Alameda","No","No","Yes, Rent Review Advisory Committee. Mediation only (Early 1990s)","No","No","Limits conversions if the percentage of rental units drops below 40% of the total available housing stoc. Must meet requirements of Design Review and the Planning Board. Tenant relocation assistance plan is required, which must give particular attention to the needs of elderly, handicapped, households with minor children, and households of low and moderate income. Ratio of owner-occupied units must not exceed 60% of the total number of dwelling units available. Year: 1983","Yes (2013)","Yes (1989)","Office $3.00/sf, Retail $1.50/sf, Hotel/motel $770/room (1989, revised 2001) ","Yes","For all Residential Developments of five (5) or more units, at least fifteen percent (15%) of the total units must be Inclusionary Units restricted for occupancy by Very Low-, Low- or Moderate-Income Households. Breakdown: 4% affordable to very low, 4% affordable to low, 7% affordable to moderate-income households. Yes in-lieu fee. (2004) Yes in-lieu fee for 9 or fewer units.","Yes (2009)","No","No","https://www.municode.com/library/ca/alameda/codes/code_of_ordinances?nodeId=CHIIAD_ARTIIBOCO_2-23REREADCO_2-24--2-29RE","https://www.municode.com/library/ca/alameda/codes/code_of_ordinances?nodeId=CHXXVIIDEFE_27-3DEIMFE_27-3.12FEFEES","https://www.municode.com/library/ca/alameda/codes/code_of_ordinances?nodeId=CHXXXDERE_ARTIZODIRE_30-17DEBOOR","https://www.municode.com/library/ca/alameda/codes/code_of_ordinances?nodeId=CHXXXDERE_ARTIZODIRE_30-16INHOREREPR","https://www.acgov.org/auditor/sleb/sourceprogram.htm","https://www.municode.com/library/ca/alameda/codes/code_of_ordinances?nodeId=CHIIIFITA_ARTIVSPTAFI_DIVVPRLE_3-70.70ORTARAAPEXGOPRENSPTAUSTAPRTACOPEET_3-70.90ACFOLICUREREDIPUFOAC","Condominium Conversion:  https://www.municode.com/library/ca/alameda/codes/code_of_ordinances?searchRequest=%7B%22searchText%22:%22%5C%22condominium%20conversion%5C%22%20vacant%22,%22pageNum%22:1,%22resultsPerPage%22:25,%22booleanSearch%22:false,%22stemming%22:true,%22fuzzy%22:false,%22synonym%22:false,%22contentTypes%22:%5B%22CODES%22%5D,%22productIds%22:%5B%5D%7D&nodeId=CHXXXDERE_ARTIZODIRE_30-8COMUHO_30-8.5PR","Housing trust fund: http://alamedaca.gov/sites/default/files/department-files/2014-08-18/23._fund_combined_0.pdf"],
 ["1","Albany","79","600674","Alameda","No","No","No","No","Yes","Yes - not to exceed 3% of multi-family rental housing and will not displace significant percentage of low and moderate income, senior or disabled tenants. (2002)","No","No","No","No","15% of units to be made affordable to low income households; Yes in-lieu fee. (2005)","No","Yes (1987)","No","code: http://www.cityofalbany.net/city-council/municipal-code","housing element: http://www.albanyca.org/index.aspx?page=779","","","","","",""],
 ["2","American Canyon","89","601640","Napa","No","No","No","No","No","Yes - restricts when rentals become less than 40% of housing stock (2006)","Yes","No","No","No","10% affordable to low income households.  Yes in-lieu fee. (2001, amended 2006)","Yes - increased bonus (2014)","No","No","code: http://qcode.us/codes/americancanyon/","density bonus: 19.27.030","","","","","",""],
@@ -550,6 +541,15 @@ var inventoryText = [["0","Alameda","78","600562","Alameda","No","No","Yes, Rent
 ["99","Woodside","56","686440","San Mateo","No","No","No","No","No","No","No","No","No","No","No","No","No","No","code: http://library.amlegal.com/nxt/gateway.dll/California/woodside_ca/woodsidecaliforniacodeofordinances?f=templates$fn=default.htm$3.0$vid=amlegal:woodside_ca","","","","","","",""],
 ["100","Yountville","91","686930","Napa","No","No","No","No","Yes - Flexibility will also be provided to consider SRO housing for commercial developments","Vacancy rate in City must be above 5% or rental units in the town above 35% of the total housing stock (Amended 1994)","Yes","No","Yes (1992)","No","15% affordable units for five or more units. Yes in-lieu fee. (1992, Amended 2012)","No","No","No","code: http://qcode.us/codes/yountville/","housing element: http://www.hcd.ca.gov/housing-policy-development/housing-resource-center/plan/he/housing-element-documents/yountville-5th-adopted020915.pdf","","","","","",""]]
 
+// set the initial map options and url here
+var INITIAL_MAP_SETTINGS = {
+	detectRetina: true,
+	center_lat: 37.7,
+	center_lon: -122,
+	zoom: 9
+}
+var INITIAL_VISJSON_URL = $('#layer-selector .active').data('url');
+
 // state variables
 var activeVis = null;
 var baseQuery = null; // default for layer
@@ -560,6 +560,14 @@ var activeCityOutline = null;
 function getInventoryById(cartodb_id) {
 	for (i=0; i<inventoryText.length; i++) {
 		if (parseInt(inventoryText[i][2]) == cartodb_id)
+			return inventoryText[i].slice(1,2).concat(inventoryText[i].slice(4));
+		}
+	return [];
+}
+
+function getInventoryByCityName(name) {
+	for (i=0; i<inventoryText.length; i++) {
+		if (inventoryText[i][1] == name)
 			return inventoryText[i].slice(1,2).concat(inventoryText[i].slice(4));
 		}
 	return [];
@@ -607,7 +615,7 @@ function setUpMap(visjsonURL, mapSettings) {
 			getVisLayer().on('featureClick', function(e, latlng, pos, data) {
 				fillInventoryBox(getInventoryById(data.cartodb_id));
 			});
-	});
+		});
 }
 
 $('#layer-selector li').click(function() {
@@ -629,6 +637,7 @@ $('#geo-selector li').click(function() {
 	var geo = $(this).data('geo'); // 'city' or 'county' or 'all'
 	var selection = $(this).text(); // name of drop-down item
 	var query = baseQuery;
+	/*
 	if (geo == 'county') {
 		var value = $(this).data('value');
 		query += " WHERE _county = '" + value + "'";
@@ -636,16 +645,22 @@ $('#geo-selector li').click(function() {
 	// San Fran county data includes Farallon Islands; map looks better if we select city instead
 	if (selection == 'San Francisco County') {
 		query = baseQuery + " WHERE _city = 'San Francisco'";
-	}
+	} */
 	if (geo == 'city') {
-		query += " WHERE _city = '" + selection + "'";
+		fillInventoryBox(getInventoryByCityName(selection));
+		query += " WHERE name = '" + selection + "'";
 		addCityOutline(selection);
+	} 
+	if (geo == 'all') {
+    	getVisLayer().setSQL(query)
 	}
-	if (geo != 'all') 
-		zoomToExtent(query);
+	zoomToExtent(query);
+			
+	// should pan the map to account for inventory box, but can't figure out how to wait for other tasks to finish
+	
+	//activeVis.getNativeMap().panBy([150,0], {animate: false});
 		
     // apply the query and save it in case the layer is changed
-    getVisLayer().setSQL(query);
 	activeQuery = query;
 	resetMenu($(this));
 });
@@ -661,7 +676,7 @@ function addCityOutline(name) {
 	activeCityName = name;
 	activeCityOutline = activeVis.getLayers()[1].createSubLayer({
 		sql: "SELECT * FROM bay_area_places_clean_v2 WHERE name = '" + name + "'",
-		cartocss: '#bay_area_places_clean_v2 { line-color: #000; line-width: 1.5;}'
+		cartocss: '#bay_area_places_clean_v2 { line-color: #000; line-width: 3;}'
 	});
 }
 
