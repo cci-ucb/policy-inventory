@@ -16,21 +16,18 @@ html, body, #map {
 	margin: 0;
 	font-family: 'Open Sans', sans-serif;
 }
-#topBanner {
-	height: 80px;
-	background-color: #fff;
-	margin: 0;
-	padding: 10px;
-	padding-left: 50px;
-	padding-top: 25px;
-	font-family: 'Open Sans', sans-serif;
-	font-size: 22px;
-	font-weight: 600;
+
+/* don't show the popups */
+.cartodb-popup {
+	display: none;
 }
-#topBanner img {
-	float: left;
-	margin-top: -14px;
-	padding-right: 15px;
+
+#topBanner {
+	height: 120px;
+	background-color: #043361;
+	margin: 0;
+	padding: 0;
+	text-align: center;
 }
 #mapContainer {
 	border-top: 1px solid #ccc;
@@ -45,7 +42,8 @@ html, body, #map {
 /* policy info panel */
 #policy-info {
 	position: absolute;
-	top: 100px;
+	z-index: 1000000;
+	top: 140px;
 	right: 20px;
 	width: 400px;
 	background-color: white;
@@ -59,11 +57,6 @@ html, body, #map {
 #policy-info .list-group-item {
 	padding-top: 4px;
 	padding-bottom: 4px;
-}
-
-/* don't show the popups */
-.cartodb-popup {
-	display: none;
 }
 
 /* overrides default style for legends */
@@ -127,16 +120,32 @@ html, body, #map {
 
 #layerSelectionContainer {
 	position: absolute;
-	top: 100px;
+	top: 140px;
 	left: 90px;
 	padding: 0px;
 }
 #geoSelectionContainer {
 	position: absolute;
-	top: 140px;
+	top: 180px;
 	left: 90px;
 	padding: 0px;
 }
+
+/* close button */
+.close {
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 18px;
+  color: #000000;
+  text-shadow: 0 1px 0 #ffffff;
+  opacity: 0.2;
+  filter: alpha(opacity=20);
+  text-decoration: none;
+}
+.close:hover {
+  color: #000000;
+  text-decoration: none;
+  opacity: 0.4;
 
 #textContent {
 	width: 80%;
@@ -226,12 +235,14 @@ and (max-width: 380px) {
 <body>
 	
 <div id="topBanner">
-	<a href='http://communityinnovation.berkeley.edu/'><img src='cci-logo.png' height='60'></a>Urban Displacement Project: Policy Inventory</div>
+	<img src='displacement-logo.png' height='120' width='800'>
+</div>
 	
 <div id="mapContainer"></div>
 
 <div id="policy-info" class="panel panel-danger">
-	<div class="panel-heading"><span id="inv0">Choose a city to see its policies</span></div>
+	<div class="panel-heading"><span id="inv0">Choose a city to see its policies</span>
+		<a class="close">&times;</a></div>
 	<ul class="list-group">
 		<li class="list-group-item"><b>County:</b>
 			&nbsp;&nbsp;<span id="inv1">-</span></li>
@@ -264,7 +275,7 @@ and (max-width: 380px) {
 		<li class="list-group-item"><b>First Source Hiring Ordinances:</b>
 			&nbsp;&nbsp;<span id="inv15">-</span></li>
 		<li class="list-group-item"><b>Sources:</b> 
-			<br>-</li>
+			&nbsp;&nbsp;<span id="inv16">-</span></li>
 	</ul>
 </div>
 
@@ -276,54 +287,37 @@ and (max-width: 380px) {
     <span class="caret"></span>
   </button>
   <ul class="dropdown-menu scrollable-menu" id="layer-selector" aria-labelledby="dropdownMenuDivider">
-	  
     <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/0f3442ba-c004-11e5-972d-0e3ff518bd15/viz.json" class="active">
     <a href="#">Number of anti-displacement policies</a></li>
-    
     <li role="separator" class="divider"></li>
-
     <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/67817fd0-c231-11e5-9621-0e5db1731f59/viz.json">
     <a href="#">Just cause eviction ordinance</a></li>
-    
     <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/30f316c0-c233-11e5-8b1b-0ea31932ec1d/viz.json">
     <a href="#">Rent stabilization or rent control</a></li>
-    
     <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/772b3aa0-c233-11e5-90af-0e5db1731f59/viz.json">
     <a href="#">Rent review board</a></li>
-    
     <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/92e6efdc-c233-11e5-9730-0e31c9be1b51/viz.json">
     <a href="#">Mobile home rent control</a></li>
-    
     <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/abc35504-c233-11e5-a7df-0e5db1731f59/viz.json">
     <a href="#">SRO preservation</a></li>
-    
     <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/c54681a4-c233-11e5-ac63-0ecd1babdde5/viz.json">
     <a href="#">Condominium conversion regulations</a></li>
-    
     <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/de20196a-c233-11e5-9e04-0ecfd53eb7d3/viz.json">
     <a href="#">Foreclosure assistance</a></li>
-    
     <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/f9ebb316-c233-11e5-b63e-0e787de82d45/viz.json">
     <a href="#">Housing linkage fee</a></li>
-    
     <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/9b4805b6-c234-11e5-812e-0e787de82d45/viz.json">
     <a href="#">Commercial linkage fee</a></li>
-    
     <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/b1bfa3da-c234-11e5-9aa6-0e3ff518bd15/viz.json">
     <a href="#">Housing trust fund</a></li>
-    
     <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/d73d07ce-c234-11e5-af0f-0e3ff518bd15/viz.json">
     <a href="#">Inclusionary zoning</a></li>
-    
     <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/0faa0850-c235-11e5-9e04-0ecfd53eb7d3/viz.json">
     <a href="#">Density bonus ordinance</a></li>
-    
     <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/2461b310-c235-11e5-b82d-0e31c9be1b51/viz.json">
     <a href="#">Community land trusts</a></li>
-    
     <li data-url="https://cci-displacement.cartodb.com/api/v2/viz/3dbcc8b8-c235-11e5-bc5e-0e3ff518bd15/viz.json">
-    <a href="#">First source hiring</a></li>
-        
+    <a href="#">First source hiring</a></li>      
   </ul>
 </div>
 </div>
@@ -454,20 +448,11 @@ and (max-width: 380px) {
 </div>
 </div>
 
-
 <!--
 <div class="expand-map">
 	<a onclick="expandMap();" class="btn btn-primary">
 		Larger <span class="glyphicon glyphicon-chevron-down"></span> Map</a></div>
 -->
-
-<div id="textContent">
-	
-<div><h3>Policy Inventory and Survey</h3></div>
-
-Text TK
-
-<div><br><br></div>
 
 <script>
 
@@ -589,6 +574,15 @@ var activeQuery = null; // geo selection if any
 var activeCityName = null;
 var activeCityOutline = null;
 
+function getCityNameFromId(id) {
+	for (i=0; i<inventoryText.length; i++) {
+		if (parseInt(inventoryText[i][2]) == id)
+			return inventoryText[i][1];
+	}
+	return '';
+}
+
+// could collapse this into the following function
 function getInventoryById(cartodb_id) {
 	for (i=0; i<inventoryText.length; i++) {
 		if (parseInt(inventoryText[i][2]) == cartodb_id)
@@ -603,6 +597,15 @@ function getInventoryByCityName(name) {
 			return inventoryText[i].slice(1,2).concat(inventoryText[i].slice(4));
 		}
 	return [];
+}
+
+function detectLinks(s) {
+	var a = s.split(' ');
+	for (var i=0; i<a.length; i++) {
+		if (a[i].slice(0,4) == 'http')
+			a[i] = '<a href="' + a[i] + '" target="_blank">link</a>'
+	}
+	return a.join(' ');
 }
 
 function fillInventoryBox(inv) {
@@ -623,6 +626,13 @@ function fillInventoryBox(inv) {
 		$("#inv13").text(inv[13]);
 		$("#inv14").text(inv[14]);
 		$("#inv15").text(inv[15]);
+		
+		var sources = ''
+		for (i=0; i<8; i++) {
+			if (inv[16+i].length > 0)
+				sources += '<br>' + detectLinks(inv[16+i]);
+		}
+		$("#inv16").html(sources);
 	}
 }
 
@@ -645,10 +655,17 @@ function setUpMap(visjsonURL, mapSettings) {
 			
 			// new code for interactivity
 			getVisLayer().on('featureClick', function(e, latlng, pos, data) {
+				$('#policy-info').show();
 				fillInventoryBox(getInventoryById(data.cartodb_id));
+				clearCityOutline();
+				addCityOutline(getCityNameFromId(data.cartodb_id));
 			});
 		});
 }
+
+$('.close').click(function() {
+	$('#policy-info').hide();
+});
 
 $('#layer-selector li').click(function() {
 	var url = $(this).data('url');
@@ -679,6 +696,7 @@ $('#geo-selector li').click(function() {
 		query = baseQuery + " WHERE _city = 'San Francisco'";
 	} */
 	if (geo == 'city') {
+		$('#policy-info').show();
 		fillInventoryBox(getInventoryByCityName(selection));
 		query += " WHERE name = '" + selection + "'";
 		addCityOutline(selection);
@@ -708,7 +726,7 @@ function addCityOutline(name) {
 	activeCityName = name;
 	activeCityOutline = activeVis.getLayers()[1].createSubLayer({
 		sql: "SELECT * FROM bay_area_places_clean_v2 WHERE name = '" + name + "'",
-		cartocss: '#bay_area_places_clean_v2 { line-color: #000; line-width: 3;}'
+		cartocss: '#bay_area_places_clean_v2 { line-color: #000; line-width: 2;}'
 	});
 }
 
