@@ -50,6 +50,10 @@ html, body, #map {
 	box-shadow: rgba(0,0,0,.1) 0 0 4px 2px;
 	font-size: 12px;
 }
+#policy-info a {
+    background: url(http://upload.wikimedia.org/wikipedia/commons/6/64/Icon_External_Link.png) center right no-repeat;
+    padding-right: 13px;
+}
 #policy-info .panel-heading {
 	font-size: 16px;
 	font-weight: bold;
@@ -602,8 +606,10 @@ function getInventoryByCityName(name) {
 function detectLinks(s) {
 	var a = s.split(' ');
 	for (var i=0; i<a.length; i++) {
-		if (a[i].slice(0,4) == 'http')
-			a[i] = '<a href="' + a[i] + '" target="_blank">link</a>'
+		if (a[i].slice(0,4) == 'http') {
+			var domain = a[i].split('/').slice(0,3).join('/');
+			a[i] = '<a href="' + a[i] + '" target="_blank">' + domain + '...</a>';
+		}
 	}
 	return a.join(' ');
 }
@@ -630,7 +636,7 @@ function fillInventoryBox(inv) {
 		var sources = ''
 		for (i=0; i<8; i++) {
 			if (inv[16+i].length > 0)
-				sources += '<br>' + detectLinks(inv[16+i]);
+				sources += '<br>- ' + detectLinks(inv[16+i]);
 		}
 		$("#inv16").html(sources);
 	}
