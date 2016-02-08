@@ -50,7 +50,7 @@ html, body, #map {
 	box-shadow: rgba(0,0,0,.1) 0 0 4px 2px;
 	font-size: 12px;
 }
-#policy-info a {
+#policy-info a.external {
     background: url(http://upload.wikimedia.org/wikipedia/commons/6/64/Icon_External_Link.png) center right no-repeat;
     padding-right: 13px;
 }
@@ -586,7 +586,7 @@ function getCityNameFromId(id) {
 	return '';
 }
 
-// could collapse this into the following function
+// could collapse this into the subsequent function
 function getInventoryById(cartodb_id) {
 	for (i=0; i<inventoryText.length; i++) {
 		if (parseInt(inventoryText[i][2]) == cartodb_id)
@@ -608,7 +608,7 @@ function detectLinks(s) {
 	for (var i=0; i<a.length; i++) {
 		if (a[i].slice(0,4) == 'http') {
 			var domain = a[i].split('/').slice(0,3).join('/');
-			a[i] = '<a href="' + a[i] + '" target="_blank">' + domain + '...</a>';
+			a[i] = '<a class="external" href="' + a[i] + '" target="_blank">' + domain + '...</a>';
 		}
 	}
 	return a.join(' ');
