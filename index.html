@@ -43,9 +43,9 @@ html, body, #map {
 #policy-info {
 	position: absolute;
 	z-index: 1000000;
-	top: 140px;
-	right: 20px;
-	width: 400px;
+	top: 130px;
+	left: 20px;
+	width: 360px;
 	background-color: white;
 	box-shadow: rgba(0,0,0,.1) 0 0 4px 2px;
 	font-size: 12px;
@@ -68,7 +68,7 @@ html, body, #map {
 
 /* overrides default style for legends */
 #map .cartodb-legend-stack {
-	left: 30px;
+	right: 30px;
 	width: 280px;
 }
 #map .cartodb-legend-stack .cartodb-legend .legend-title {
@@ -118,6 +118,12 @@ html, body, #map {
 	font-size: 12px;
 }
 
+/* overrides default style for zoom icons */
+#map .cartodb-zoom {
+	position: absolute;
+	right: 30px;
+}
+
 /* add scrolling to bootstrap menus */
 .scrollable-menu {
     height: auto;
@@ -128,13 +134,13 @@ html, body, #map {
 #layerSelectionContainer {
 	position: absolute;
 	top: 140px;
-	left: 90px;
+	right: 90px;
 	padding: 0px;
 }
 #geoSelectionContainer {
 	position: absolute;
 	top: 180px;
-	left: 90px;
+	right: 90px;
 	padding: 0px;
 }
 
@@ -153,7 +159,7 @@ html, body, #map {
   color: #000000;
   text-decoration: none;
   opacity: 0.4;
-
+}
 #textContent {
 	width: 80%;
 	padding-top: 30px; 
@@ -233,7 +239,7 @@ and (max-width: 380px) {
 <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
 <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
 <script src="lib/jquery.min.js"></script>
-<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet" href="lib/bootstrap.css">
 <script src="lib/bootstrap.js"></script>
 <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700'>
@@ -249,7 +255,7 @@ and (max-width: 380px) {
 <div id="mapContainer"></div>
 
 <div id="policy-info" class="panel panel-danger">
-	<div class="panel-heading"><span id="inv0">Choose a city to see its policies</span>
+	<div class="panel-heading"><span id="inv0">Select a city to see its policies</span>
 		<a class="close">&times;</a></div>
 	<ul class="list-group">
 		<li class="list-group-item"><b>County:</b>
@@ -569,8 +575,8 @@ var inventoryText = [["0","Alameda","78","600562","Alameda","No","No","Yes, Rent
 // set the initial map options and url here
 var INITIAL_MAP_SETTINGS = {
 	detectRetina: true,
-	center_lat: 37.7,
-	center_lon: -122,
+	center_lat: 37.6,
+	center_lon: -122.4,
 	zoom: 9
 }
 var INITIAL_VISJSON_URL = $('#layer-selector .active').data('url');
@@ -664,6 +670,7 @@ function setUpMap(visjsonURL, mapSettings) {
 			if (activeCityName) addCityOutline(activeCityName);
 			
 			// new code for interactivity
+			$('#policy-info').resizable({});
 			$('#policy-info').draggable({
 				handle: '.panel-heading',
 			});
