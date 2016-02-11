@@ -711,11 +711,11 @@ $('#geo-selector li').click(function() {
 		fillInventoryBox(getInventoryByCityName(selection));
 		query += " WHERE name = '" + selection + "'";
 		addCityOutline(selection);
-		zoomToExtent(query, 0.15);
+		zoomToExtent(query, 1.0);
 	} 
 	if (geo == 'all') {
     	getVisLayer().setSQL(query)
-    	zoomToExtent(query, -0.4);
+    	zoomToExtent(query, 0);
 	}
 	resetMenu($(this));
 });
@@ -733,9 +733,9 @@ function padBounds(bounds, pad) {
 	var sw_lon = bounds[0][1];
 	var ne_lat = bounds[1][0];
 	var ne_lon = bounds[1][1];
-	var lat = (ne_lat - sw_lat) * (1 + pad);
-	var lon = (ne_lon - sw_lon) * (1 + pad);
-	// skew the center to the right to avoid blocking by policy window
+	var lat = (ne_lat - sw_lat) * pad;
+	var lon = (ne_lon - sw_lon) * pad;
+	// shift the center to the right to avoid being blocked by policy window
 	return [[sw_lat - lat, sw_lon - lon*0.5], [ne_lat + lat, ne_lon + lon*1.5]];
 }
 
