@@ -58,6 +58,9 @@ html, body, #map {
 	font-size: 16px;
 	font-weight: bold;
 }
+#policy-info .panel-heading:hover {
+	cursor: pointer;
+}
 #policy-info .list-group-item {
 	padding-top: 4px;
 	padding-bottom: 4px;
@@ -230,6 +233,7 @@ and (max-width: 380px) {
 <script src="http://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
 <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
 <script src="lib/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 <link rel="stylesheet" href="lib/bootstrap.css">
 <script src="lib/bootstrap.js"></script>
 <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700'>
@@ -660,6 +664,9 @@ function setUpMap(visjsonURL, mapSettings) {
 			if (activeCityName) addCityOutline(activeCityName);
 			
 			// new code for interactivity
+			$('#policy-info').draggable({
+				handle: '.panel-heading',
+			});
 			getVisLayer().on('featureClick', function(e, latlng, pos, data) {
 				$('#policy-info').show();
 				fillInventoryBox(getInventoryById(data.cartodb_id));
