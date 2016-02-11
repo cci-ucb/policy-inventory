@@ -670,7 +670,6 @@ function setUpMap(visjsonURL, mapSettings) {
 			if (activeCityName) addCityOutline(activeCityName);
 			
 			// new code for interactivity
-			$('#policy-info').resizable({});
 			$('#policy-info').draggable({
 				handle: '.panel-heading',
 			});
@@ -703,43 +702,41 @@ $('#layer-selector li').click(function() {
 
 $('#geo-selector li').click(function() {
 	clearCityOutline();
-	var geo = $(this).data('geo'); // 'city' or 'county' or 'all'
+	var geo = $(this).data('geo'); // 'city' or 'all'
 	var selection = $(this).text(); // name of drop-down item
 	var query = baseQuery;
-	/*
-	if (geo == 'county') {
-		var value = $(this).data('value');
-		query += " WHERE _county = '" + value + "'";
-	}
-	// San Fran county data includes Farallon Islands; map looks better if we select city instead
-	if (selection == 'San Francisco County') {
-		query = baseQuery + " WHERE _city = 'San Francisco'";
-	} */
+
 	if (geo == 'city') {
 		$('#policy-info').show();
 		fillInventoryBox(getInventoryByCityName(selection));
 		query += " WHERE name = '" + selection + "'";
 		addCityOutline(selection);
+		zoomToExtent(query, 0.15);
 	} 
 	if (geo == 'all') {
     	getVisLayer().setSQL(query)
+    	zoomToExtent(query, -0.4);
 	}
-	zoomToExtent(query);
-			
-	// should pan the map to account for inventory box, but can't figure out how to wait for other tasks to finish
-	
-	//activeVis.getNativeMap().panBy([150,0], {animate: false});
-		
-    // save query in case the layer is changed
-	// activeQuery = query;
 	resetMenu($(this));
 });
 
-function zoomToExtent(query) {
+function zoomToExtent(query, pad) {
 	var sql = new cartodb.SQL({user: 'cci-displacement'});
 	sql.getBounds(query).done(function(bounds) {
-        activeVis.getNativeMap().fitBounds(bounds);
+        activeVis.getNativeMap().fitBounds(padBounds(bounds, pad));
     });
+}
+
+function padBounds(bounds, pad) {
+	// increase bounds proportionally by pad value in all directions
+	var sw_lat = bounds[0][0];
+	var sw_lon = bounds[0][1];
+	var ne_lat = bounds[1][0];
+	var ne_lon = bounds[1][1];
+	var lat = (ne_lat - sw_lat) * (1 + pad);
+	var lon = (ne_lon - sw_lon) * (1 + pad);
+	// skew the center to the right to avoid blocking by policy window
+	return [[sw_lat - lat, sw_lon - lon*0.5], [ne_lat + lat, ne_lon + lon*1.5]];
 }
 
 function addCityOutline(name) {
