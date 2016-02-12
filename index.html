@@ -55,6 +55,7 @@ html, body, #map {
     padding-right: 13px;
 }
 #policy-info .panel-heading {
+	padding-right: 20px;
 	font-size: 16px;
 	font-weight: bold;
 }
@@ -139,7 +140,7 @@ html, body, #map {
 /* overrides default style for zoom icons */
 #map .cartodb-zoom {
 	position: absolute;
-	right: 30px;
+	right: 35px;
 }
 
 /* add scrolling to bootstrap menus */
@@ -152,55 +153,14 @@ html, body, #map {
 #layerSelectionContainer {
 	position: absolute;
 	top: 140px;
-	right: 90px;
+	right: 100px;
 	padding: 0px;
 }
 #geoSelectionContainer {
 	position: absolute;
 	top: 180px;
-	right: 90px;
+	right: 100px;
 	padding: 0px;
-}
-
-#textContent {
-	width: 80%;
-	padding-top: 30px; 
-	margin-left: auto;
-	margin-right: auto;
-	font-family: 'Open Sans', sans-serif;
-	font-size: 16px;
-}
-#textContent h3 {
-	font-size: 20px;
-	font-weight: 600;
-	margin-bottom: 18px;
-}
-#textContent h4 {
-	font-size: 16px;
-	font-weight: 600;
-	margin-bottom: 12px;
-}
-#textContent li {
-	margin-top: 6px;
-}
-#textContent .smaller {
-	font-size: 14px;
-}
-#textContent .larger {
-	font-size: 18px;
-}
-#textContent .larger li {
-	margin-top: 12px;
-}
-.figure {
-	float: right;
-	margin: 20px;
-	margin-top: 0px;
-	margin-right: -50px;
-	padding: 0px;
-	width: 400px;
-	border: 1px solid #ccc;
-	border-right: 0px;
 }
 
 @media only screen 
@@ -252,7 +212,7 @@ and (max-width: 380px) {
 <div id="policy-info" class="panel panel-danger">
 	<div><a class="close">&times;</a></div>
 	<div class="panel-heading">
-		<span id="inv0">Select a city to see its anti-displacement policy measures</span>
+		<span id="inv0">Choose a city from the map to see its anti-displacement policy measures</span>
 	</div>
 	<ul class="list-group">
 		<li class="list-group-item"><b>County:</b>
@@ -294,7 +254,7 @@ and (max-width: 380px) {
 <div class="dropdown">
 <!-- this button style is from the Bootstrap library -->
   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-    See another data series...
+    Map a specific policy...
     <span class="caret"></span>
   </button>
   <ul class="dropdown-menu scrollable-menu" id="layer-selector" aria-labelledby="dropdownMenuDivider">
@@ -611,7 +571,7 @@ function detectLinks(s) {
 
 function fillInventoryBox(inv) {
 	if (inv.length > 0) {
-		$("#inv0").text(inv[0]);
+		$("#inv0").text(inv[0] + " policy measures");
 		$("#inv1").text(inv[1]);
 		$("#inv2").text(inv[2]);
 		$("#inv3").text(inv[3]);
