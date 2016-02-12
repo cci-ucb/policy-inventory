@@ -66,6 +66,24 @@ html, body, #map {
 	padding-bottom: 4px;
 }
 
+/* close button */
+.close {
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 18px;
+  color: #000000;
+  text-shadow: 0 1px 0 #ffffff;
+  opacity: 0.2;
+  filter: alpha(opacity=20);
+  text-decoration: none;
+  padding-right: 5px;
+}
+.close:hover {
+  color: #000000;
+  text-decoration: none;
+  opacity: 0.4;
+}
+
 /* overrides default style for legends */
 #map .cartodb-legend-stack {
 	right: 30px;
@@ -144,22 +162,6 @@ html, body, #map {
 	padding: 0px;
 }
 
-/* close button */
-.close {
-  font-size: 20px;
-  font-weight: bold;
-  line-height: 18px;
-  color: #000000;
-  text-shadow: 0 1px 0 #ffffff;
-  opacity: 0.2;
-  filter: alpha(opacity=20);
-  text-decoration: none;
-}
-.close:hover {
-  color: #000000;
-  text-decoration: none;
-  opacity: 0.4;
-}
 #textContent {
 	width: 80%;
 	padding-top: 30px; 
@@ -248,8 +250,10 @@ and (max-width: 380px) {
 <div id="mapContainer"></div>
 
 <div id="policy-info" class="panel panel-danger">
-	<div class="panel-heading"><span id="inv0">Select a city to see its anti-displacement policies</span>
-		<div><a class="close">&times;</a></div></div>
+	<div><a class="close">&times;</a></div>
+	<div class="panel-heading">
+		<span id="inv0">Select a city to see its anti-displacement policy measures</span>
+	</div>
 	<ul class="list-group">
 		<li class="list-group-item"><b>County:</b>
 			&nbsp;&nbsp;<span id="inv1">-</span></li>
