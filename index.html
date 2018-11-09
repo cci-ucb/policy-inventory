@@ -425,6 +425,7 @@ and (max-width: 380px) {
     <li data-geo="city"><a href="#">Vacaville</a></li>
     <li data-geo="city"><a href="#">Vallejo</a></li>
     <li data-geo="city"><a href="#">Walnut Creek</a></li>
+    <li data-geo="city"><a href="#">Watsonville</a></li>
     <li data-geo="city"><a href="#">Windsor</a></li>
     <li data-geo="city"><a href="#">Woodside</a></li>
     <li data-geo="city"><a href="#">Yountville</a></li> </ul>
@@ -537,6 +538,7 @@ var inventoryText = [["0","Alameda","78","600562","Alameda","No","No","Yes, Rent
 ["95","Vacaville","68","681554","Solano","No","No","No","Graduated CPI (1992)","No","Vacancy rate in City must be above 3%. Other requirements: metering; off-street parking; sound insulation; common and private recreational open space. Year: 1982","Yes","No","No","No","No","No","No","No","http://www.codepublishing.com/ca/vacaville/","Condominium conversion: CH 14.11.164; Density Bonus: 14.09.116","mobie home: ch 2.36","","","","",""],
 ["96","Vallejo","39","681666","Solano","No","No","No","5% cap (1982); must not exceed CPI % increase (2004)","No","No","Yes","No","No","No","No","No","No","Yes","code: https://www.municode.com/library/ca/vallejo/codes/code_of_ordinances?searchRequest=%7B%22searchText%22:%22%5C%22mobile%20home%5C%22%22,%22pageNum%22:1,%22resultsPerPage%22:25,%22booleanSearch%22:false,%22stemming%22:true,%22fuzzy%22:false,%22synonym%22:false,%22contentTypes%22:%5B%22CODES%22,%22ORDINANCES%22%5D,%22productIds%22:%5B%5D%7D&nodeId=TIT5BULIRE_CH5.64MOHORERE_5.64.080EXREIN","mobile home: 5.64.076","","","","","",""],
 ["97","Walnut Creek","99","683346","Contra Costa","No","No","No","No","No","Requires major rehab (1984, last amended 2011); improvements required; tenant's right to Purchase; restricted rent increase; Vacancy rate in City must be above 5% (1982)","Yes","Yes (2005)","$5 per square foot (2005)","No","For projects of 10 or more units: Rental: all projects must pay an Affordable Housing Impact Fee. For-sale: 6% of units must be affordable to very low income households, 7% to low, and 9% to moderate income housing or pay  in-lieu fees. (2004, amended 2009, 2010, 2011)","No","No","No","code: http://www.codepublishing.com/CA/WalnutCreek/#!/WalnutCreek10/WalnutCreek1001.html#10-1.702","Condomium conversion: Article 7 & 8","","","","","",""],
+["123","Watsonville","","","","","","","","","","","","","","","","","","","","","","","","",""],
 ["98","Windsor","77","685922","Sonoma","No","No","No","100% of CPI or 6% cap (1992)","No","No","No","No","No","No","Set aside either 10% of units for very low-income households; or 15% for low-; or 20% for moderate.  Yes in-lieu fee. (2004, last amended 2008) Station Area/Downtown Inclusionary Housing Ordinance (2016)","No","No","No","code: https://www.municode.com/library/ca/windsor/codes/code_of_ordinances?searchRequest=%7B%22searchText%22:%22%5C%22affordable%20housing%5C%22%22,%22pageNum%22:1,%22resultsPerPage%22:25,%22booleanSearch%22:false,%22stemming%22:true,%22fuzzy%22:false,%22synonym%22:false,%22contentTypes%22:%5B%22CODES%22,%22ORDINANCES%22%5D,%22productIds%22:%5B%5D%7D&nodeId=TITXVIDEAGSUFEDESEZOGRMA_CH8SUOR_ART12VETEMA_16-8-1225FIPR","housing element: http://www.hcd.ca.gov/housing-policy-development/housing-resource-center/plan/he/housing-element-documents/windsor_5th_draft092214.pdf?bcsi_scan_2687365ababd2c82=lzDRNjbuSlF/IyGImZl5aOr251AFAAAAuFpqGA==&bcsi_scan_filename=windsor_5th_draft092214.pdf","","","","","",""],
 ["99","Woodside","56","686440","San Mateo","No","No","No","No","No","No","No","No","No","No","No","No","No","No","code: http://library.amlegal.com/nxt/gateway.dll/California/woodside_ca/woodsidecaliforniacodeofordinances?f=templates$fn=default.htm$3.0$vid=amlegal:woodside_ca","","","","","","",""],
 ["100","Yountville","91","686930","Napa","No","No","No","No","Yes - Flexibility will also be provided to consider SRO housing for commercial developments","Vacancy rate in City must be above 5% or rental units in the town above 35% of the total housing stock (Amended 1994)","Yes","No","Yes (1992)","No","15% affordable units for five or more units. Yes in-lieu fee. (1992, Amended 2012)","No","No","No","code: http://qcode.us/codes/yountville/","housing element: http://www.hcd.ca.gov/housing-policy-development/housing-resource-center/plan/he/housing-element-documents/yountville-5th-adopted020915.pdf","","","","","",""]]
@@ -680,7 +682,7 @@ $('#geo-selector li').click(function() {
 		fillInventoryBox(getInventoryByCityName(selection));
 		query += " WHERE name = '" + selection + "'";
 		addCityOutline(selection);
-		zoomToExtent(query, 1.0);
+		// zoomToExtent(query, 1.0);
 	} 
 	if (geo == 'all') {
     	getVisLayer().setSQL(query)
@@ -709,11 +711,14 @@ function padBounds(bounds, pad) {
 }
 
 function addCityOutline(name) {
+	var query = "SELECT * FROM bay_area_places_clean_v3_septemberupdate WHERE name = '" + name + "'";
+	var styles = '#bay_area_places_clean_v3_septemberupdate { line-color: #000; line-width: 2;}';
 	activeCityName = name;
 	activeCityOutline = activeVis.getLayers()[1].createSubLayer({
-		sql: "SELECT * FROM bay_area_places_clean_v2 WHERE name = '" + name + "'",
-		cartocss: '#bay_area_places_clean_v2 { line-color: #000; line-width: 2;}'
+		sql: query,
+		cartocss: styles
 	});
+	zoomToExtent(query, 1.0);
 }
 
 function clearCityOutline() {
